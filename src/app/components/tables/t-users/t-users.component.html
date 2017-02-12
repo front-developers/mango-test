@@ -1,0 +1,38 @@
+<div class="t-users">
+  <label class="t-users__search">
+    <span class="t-users__search-text">Search:</span>
+    <input type="text"
+           [(ngModel)]="local.search"
+           class="t-users__field">
+  </label>
+  <table class="t-users__table">
+    <thead>
+      <tr>
+        <th [ngClass]="{'_up': local.sortBy === 'name' && local.sortDirection,
+                        '_down': local.sortBy === 'name' && !local.sortDirection}"
+            (click)="sortBy('name')">Name</th>
+        <th [ngClass]="{'_up': local.sortBy === 'balance' && local.sortDirection,
+                        '_down': local.sortBy === 'balance' && !local.sortDirection}"
+            (click)="sortBy('balance')">Balance</th>
+        <th [ngClass]="{'_up': local.sortBy === 'company' && local.sortDirection,
+                        '_down': local.sortBy === 'company' && !local.sortDirection}"
+            (click)="sortBy('company')">Company</th>
+        <th [ngClass]="{'_up': local.sortBy === 'email' && local.sortDirection,
+                        '_down': local.sortBy === 'email' && !local.sortDirection}"
+            (click)="sortBy('email')">Email</th>
+        <th [ngClass]="{'_up': local.sortBy === 'address' && local.sortDirection,
+                        '_down': local.sortBy === 'address' && !local.sortDirection}"
+            (click)="sortBy('address')">Address</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of local.users | search:local.search:local.excludePropsArr | orderBy:local.sortBy:local.sortDirection;">
+        <td>{{user.name}}</td>
+        <td>{{user.balance}}</td>
+        <td>{{user.company}}</td>
+        <td>{{user.email}}</td>
+        <td>{{user.address}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
